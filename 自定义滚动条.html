@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #box{
+            width: 300px;
+            height: 300px;
+            border: 1px solid #005aa0;
+            margin: 100px auto;
+            position: relative;
+        }
+        #left{
+            width: 280px;
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+            float: left;
+        }
+        p{
+            width: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        #right{
+            width: 20px;
+            height: 100%;
+            position: relative;
+            background: #eee;
+            float: left;
+        }
+        #bar{
+            width: 20px;
+            height: 20px;
+            background: #f00;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+    <script src="common.js"></script>
+    <script>
+        window.onload=function(){
+            var oBox=document.getElementById('box');
+            var oLeft=document.getElementById('left');
+            var oP=document.getElementById('p1');
+            var oRight=document.getElementById('right');
+            var oBar=document.getElementById('bar');
+            var t=0;
+            
+            function wheel(){
+                if(t<0){
+                    t=0;
+                }else if(t>=oRight.offsetHeight-oBar.offsetHeight){
+                    t=oRight.offsetHeight-oBar.offsetHeight
+                }
+
+                oBar.style.top=t+'px';
+                oP.style.top=-t/(oRight.offsetHeight-oBar.offsetHeight)*
+                        (oP.offsetHeight-oLeft.offsetHeight)+'px';
+            }
+
+            oBar.onmousedown=function(ev){
+                var oEvent=ev||event;
+                var disY=oEvent.clientY-oBar.offsetTop;
+                
+                document.onmousemove=function(ev){
+                    var oEvent=ev||event;
+                    t=oEvent.clientY-disY;
+                    wheel()
+                    
+                };
+                document.onmouseup=function(){
+                    document.onmousemove=null;
+                    document.onmouseup=null;
+                };
+                return false
+                
+            };
+
+            addWheel(oBox,function(bDown){
+                if(bDown){
+                    //往下
+                    t+=10;
+                    wheel()
+                }else{
+                    //往上
+                    t-=10;
+                    wheel()
+                }
+            })
+        };
+    </script>
+</head>
+<body>
+<div id="box">
+    <div id="left">
+        <p id="p1">智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社
+            智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社
+            智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社
+            智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社
+            智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社
+            智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社
+            智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社
+            智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社
+            智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社
+            智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社
+            智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社
+            智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社
+            智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社
+            智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社
+            智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社
+            智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社智能社
+        </p>
+    </div>
+    <div id="right">
+        <div id="bar"></div>
+    </div>
+</div>
+</body>
+</html>
